@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:discoverdotnet_mobile.ViewModels" 
+             xmlns:sharpnadow="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:model="clr-namespace:discoverdotnet_mobile.Models"
+             xmlns:ressources="clr-namespace:discoverdotnet_mobile.Ressources"
+             xmlns:toolkit="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="discoverdotnet_mobile.Views.NewsPage"
+             x:DataType="viewmodels:NewsViewModel">
+    <ContentPage.Resources>
+        <toolkit:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"></toolkit:IsNotNullOrEmptyConverter>        
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource Background}">
+            <sharpnadow:TaskLoaderView
+                Grid.Row="0"
+                TaskLoaderNotifier="{Binding Loader}">
+                <RefreshView Command="{Binding Loader.RefreshCommand}"
+                     IsRefreshing="{Binding Loader.ShowRefresher}"
+                     RefreshColor="{StaticResource Primary}">
+                    <CollectionView                       
+                        BackgroundColor="Transparent"
+                        ItemsSource="{Binding Loader.Result}"
+                        SelectionMode="None"
+                    >
+                        <CollectionView.Header>
+                            <Grid BackgroundColor="{StaticResource Primary}"
+                                  RowDefinitions="*,1,Auto">
+                                <Label Grid.Row="0"
+                                       TextColor="{StaticResource HeaderText}"
+                                       FontFamily="{StaticResource RobotoSlab}"
+                                       Margin="20,0"
+                                       >
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="Recent " FontSize="Large"/>
+                                                <Span Text="News" FontAttributes="Bold" FontSize="Large" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <BoxView Grid.Row="1" 
+                                         BackgroundColor="{StaticResource PrimaryDarker}"
+                                         Margin="20,0"/>
+                                <Label Grid.Row="2" 
+                                       TextColor="{StaticResource HeaderText}"
+                                       Margin="20,0,0,10"
+                                       FontFamily="{StaticResource Italic}"
+                                       Text="A roundup of recent blog posts, podcasts, and more."/>
+                            </Grid>
+                        </CollectionView.Header>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:News">
+                                <Grid>
+                                    <Frame 
+                                        Style="{StaticResource CardStyle}"
+                                        Margin="20,5"
+                                        HeightRequest="120">
+                                        <StackLayout>
+                                            <Label Grid.Row="0" 
+                                                   Style="{StaticResource CardTitle}"
+                                                   Text="{Binding Title}">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                        Command="{Binding OpenLink, Source={RelativeSource AncestorType={x:Type viewmodels:NewsViewModel}}}" 
+                                                        CommandParameter="{Binding Link}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                            <Label Text="{Binding FeedTitle, StringFormat='Feed {0}'}"
+                                                   IsVisible="{Binding FeedTitle, Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
+                                            <Label Text="{Binding Author, StringFormat='By {0}'}"
+                                                   IsVisible="{Binding Author, Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
+                                            <Label VerticalOptions="Center"
+                                                   Text="{Binding Published, StringFormat='Published {0}'}"/>
+                                        </StackLayout>                                        
+                                    </Frame>                                    
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </sharpnadow:TaskLoaderView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

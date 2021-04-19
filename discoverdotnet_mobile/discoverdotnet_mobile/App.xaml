@@ -2,12 +2,20 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="discoverdotnet_mobile.App">
-    <!--
-        Define global resources and styles here, that apply to all pages in your app.
-    -->
+
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Primary">#6f42c1</Color>
+            <Color x:Key="PrimaryDarker">#643bad</Color>
+            <Color x:Key="Background">#f8f9fa</Color>
+
+            <Color x:Key="HeaderText">#ffffff</Color>
+
+            <x:String x:Key="FontAwesome">FontAwesome</x:String>
+            <x:String x:Key="Italic">NothingYouCouldDo</x:String>
+            <x:String x:Key="Roboto">Roboto</x:String>
+            <x:String x:Key="RobotoSlab">RobotoSlab</x:String>
+
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -26,6 +34,19 @@
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="CardStyle">
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="#ffffff"/>
+            </Style>
+            <Style TargetType="Label" x:Key="CardTitle">
+                <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+                <Setter Property="FontSize" Value="Medium"/>
             </Style>
         </ResourceDictionary>        
     </Application.Resources>

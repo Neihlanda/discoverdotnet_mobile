@@ -1,29 +1,25 @@
-﻿using discoverdotnet_mobile.Models;
-using discoverdotnet_mobile.Services;
+﻿using discoverdotnet_mobile.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace discoverdotnet_mobile.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        protected IDiscoverDotnetService DiscoverDotnetService { get; }
 
-        bool isBusy = false;
-        public bool IsBusy
+        public BaseViewModel()
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            DiscoverDotnetService = new DiscoverDotnetService();
         }
 
-        string title = string.Empty;
-        public string Title
+        public virtual Task InitializeAsync(object parameter)
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+            return Task.FromResult(true);
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
