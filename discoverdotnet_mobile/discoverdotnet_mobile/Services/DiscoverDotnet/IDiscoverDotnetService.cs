@@ -8,6 +8,7 @@ namespace discoverdotnet_mobile.Services
 {
     public interface IDiscoverDotnetService
     {
-        Task<List<News>> GetNews();     
+        Task<List<News>> GetNews();
+        Task<List<Project>> GetProjects();
     }
 }

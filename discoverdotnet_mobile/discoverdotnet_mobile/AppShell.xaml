@@ -38,42 +38,10 @@
             </Tab.Icon>
             <ShellContent Route="HomePage" ContentTemplate="{DataTemplate local:NewsPage}" />
         </Tab>
-        <Tab Title="Project">
+        <Tab Title="Projects">
             <Tab.Icon>
                 <FontImageSource FontFamily="{StaticResource FontAwesome}" 
                                  Glyph="{Static ressources:FontAwesomeGlyph.Terminal}"
-                                 Size="Small"/>
-            </Tab.Icon>
-            <ShellContent Route="ProjectPage" ContentTemplate="{DataTemplate local:ProjectPage}" />
-        </Tab>
-        <Tab Title="Issues">
-            <Tab.Icon>
-                <FontImageSource FontFamily="{StaticResource FontAwesome}" 
-                                 Glyph="{Static ressources:FontAwesomeGlyph.Bug}"
-                                 Size="Small"/>
-            </Tab.Icon>
-            <ShellContent Route="ProjectPage" ContentTemplate="{DataTemplate local:ProjectPage}" />
-        </Tab>
-        <Tab Title="Blogs">
-            <Tab.Icon>
-                <FontImageSource FontFamily="{StaticResource FontAwesome}" 
-                                 Glyph="{Static ressources:FontAwesomeGlyph.Newspaper}"
-                                 Size="Small"/>
-            </Tab.Icon>
-            <ShellContent Route="ProjectPage" ContentTemplate="{DataTemplate local:ProjectPage}" />
-        </Tab>
-        <Tab Title="Broadcasts">
-            <Tab.Icon>
-                <FontImageSource FontFamily="{StaticResource FontAwesome}" 
-                                 Glyph="{Static ressources:FontAwesomeGlyph.Rss}"
-                                 Size="Small"/>
-            </Tab.Icon>
-            <ShellContent Route="ProjectPage" ContentTemplate="{DataTemplate local:ProjectPage}" />
-        </Tab>
-        <Tab Title="Resources">
-            <Tab.Icon>
-                <FontImageSource FontFamily="{StaticResource FontAwesome}" 
-                                 Glyph="{Static ressources:FontAwesomeGlyph.Link}"
                                  Size="Small"/>
             </Tab.Icon>
             <ShellContent Route="ProjectPage" ContentTemplate="{DataTemplate local:ProjectPage}" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using discoverdotnet_mobile.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace discoverdotnet_mobile.Views
         public ProjectPage()
         {
             InitializeComponent();
+            this.BindingContext = new ProjectViewModel();
+            ((ProjectViewModel)this.BindingContext).InitializeAsync(null);
         }
     }
 }

@@ -1,12 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="discoverdotnet_mobile.Views.ProjectPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:toolkit="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:sharpnadow="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView" 
+             xmlns:viewmodels="clr-namespace:discoverdotnet_mobile.ViewModels" 
+             xmlns:model="clr-namespace:discoverdotnet_mobile.Models"
+             x:Class="discoverdotnet_mobile.Views.ProjectPage"
+             x:DataType="viewmodels:ProjectViewModel">
+    <ContentPage.Resources>
+        <toolkit:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"></toolkit:IsNotNullOrEmptyConverter>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="{StaticResource Background}">
+            <sharpnadow:TaskLoaderView
+                Grid.Row="0"
+                TaskLoaderNotifier="{Binding Loader}">
+                <CollectionView                       
+                        BackgroundColor="Transparent"
+                        ItemsSource="{Binding Loader.Result}"
+                        SelectionMode="None"
+                    >
+                    <CollectionView.Header>
+                        <Label 
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="{StaticResource HeaderText}"
+                                FontFamily="{StaticResource RobotoSlab}"
+                                HorizontalTextAlignment="Center"
+                                >
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="All " FontSize="Large" />
+                                        <Span Text="Projects" FontAttributes="Bold" FontSize="Large" />
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Project">
+                            <Grid>
+                                <Frame 
+                                    Style="{StaticResource CardStyle}"
+                                    Margin="20,5"
+                                    >
+                                    <Grid RowDefinitions="*,40">
+                                        <StackLayout Grid.Row="0">
+                                            <Label Grid.Row="0" 
+                                                       Margin="0,0,20,0"
+                                                       Style="{StaticResource CardTitle}"
+                                                       Text="{Binding Title}">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                                            Command="{Binding OpenLink, Source={RelativeSource AncestorType={x:Type viewmodels:ProjectViewModel}}}" 
+                                                            CommandParameter="{Binding SourceCode}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                            <Label Text="{Binding Description}"
+                                                   IsVisible="{Binding Description, Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
+                                            <Label Text="{Binding Website, StringFormat='By {0}'}"
+                                                       IsVisible="{Binding Website, Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
+                                            <Label VerticalOptions="Center"
+                                                       Text="{Binding PushedAt, StringFormat='Pushed At {0}'}"/>
+                                            <Label VerticalOptions="Center"
+                                                    Text="{Binding Language, StringFormat='Language {0}'}"
+                                                    IsVisible="{Binding Language, Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
+                                        </StackLayout>
+                                        <Grid Grid.Row="1"
+                                                  Margin="0,10,0,5">
+                                            <toolkit:Shield 
+                                                    Grid.Column="0"
+                                                    Subject="Stars"
+                                                    Status="{Binding StargazersCount}"
+                                                    StatusBackgroundColor="SeaGreen"
+                                                    StatusTextColor="White"
+                                                   />
+                                            <toolkit:Shield
+                                                    Grid.Column="2"
+                                                    Subject="Issues"
+                                                    Status="{Binding OpenIssuesCount}"
+                                                    StatusBackgroundColor="SeaGreen"
+                                                    StatusTextColor="White"
+                                                   />
+                                            <toolkit:Shield 
+                                                    Grid.Column="1"
+                                                    Subject="Fork"
+                                                    Status="{Binding ForksCount}"
+                                                    StatusBackgroundColor="SeaGreen"
+                                                    StatusTextColor="White"
+                                                   />
+
+                                        </Grid>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </sharpnadow:TaskLoaderView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
