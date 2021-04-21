@@ -6,10 +6,10 @@
              xmlns:model="clr-namespace:discoverdotnet_mobile.Models"
              xmlns:ressources="clr-namespace:discoverdotnet_mobile.Ressources"
              xmlns:toolkit="http://xamarin.com/schemas/2020/toolkit"
-             x:Class="discoverdotnet_mobile.Views.NewsPage"
-             x:DataType="viewmodels:NewsViewModel">
+             x:Class="discoverdotnet_mobile.Views.BookmarkPage"
+             x:DataType="viewmodels:BookmarkViewModel">
     <ContentPage.Resources>
-        <toolkit:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"></toolkit:IsNotNullOrEmptyConverter>        
+        <toolkit:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"></toolkit:IsNotNullOrEmptyConverter>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid BackgroundColor="{StaticResource Background}">
@@ -35,7 +35,7 @@
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <FormattedString.Spans>
-                                                <Span Text="Recent " FontSize="Large"/>
+                                                <Span Text="Bookmarked " FontSize="Large"/>
                                                 <Span Text="News" FontAttributes="Bold" FontSize="Large" />
                                             </FormattedString.Spans>
                                         </FormattedString>
@@ -66,7 +66,7 @@
                                                        Text="{Binding Title}">
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer 
-                                                            Command="{Binding OpenLink, Source={RelativeSource AncestorType={x:Type viewmodels:NewsViewModel}}}" 
+                                                            Command="{Binding OpenLink, Source={RelativeSource AncestorType={x:Type viewmodels:BaseViewModel}}}" 
                                                             CommandParameter="{Binding Link}" />
                                                     </Label.GestureRecognizers>
                                                 </Label>
@@ -85,13 +85,13 @@
                                                        >
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer 
-                                                            Command="{Binding BookmarkNews, Source={RelativeSource AncestorType={x:Type viewmodels:NewsViewModel}}}" 
+                                                            Command="{Binding DeleteBookmark, Source={RelativeSource AncestorType={x:Type viewmodels:BookmarkViewModel}}}" 
                                                             CommandParameter="{Binding .}"/>
                                                     </Label.GestureRecognizers>
                                                 </Label>
                                             </Grid>
                                         </Grid>
-                                    </Frame>                                    
+                                    </Frame>
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

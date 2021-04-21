@@ -4,44 +4,39 @@ using discoverdotnet_mobile.Services;
 using Sharpnado.Presentation.Forms;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace discoverdotnet_mobile.ViewModels
 {
-    public class NewsViewModel : BaseViewModel
+    public class BookmarkViewModel : BaseViewModel
     {
         private readonly IBookmarkService _bookmarkService;
-        public TaskLoaderNotifier<List<News>> Loader { get; }
+        public TaskLoaderNotifier<ObservableCollection<News>> Loader { get; }
 
-
-        public NewsViewModel()
+        public BookmarkViewModel()
         {
             _bookmarkService = new BookmarkService();
-            Loader = new TaskLoaderNotifier<List<News>>();
+            Loader = new TaskLoaderNotifier<ObservableCollection<News>>();
         }
 
         public override Task InitializeAsync(object parameter)
         {
-            Loader.Load(LoadLastNews);
+            Loader.Load(async () => new ObservableCollection<News>(await _bookmarkService.GetBookmarkedNews()));
             return base.InitializeAsync(parameter);
         }
 
-        private async Task<List<News>> LoadLastNews()
-        {
-            return await DiscoverDotnetService.GetNews();        
-        }
-
         private ICommand bookmarkNews;
-        public ICommand BookmarkNews => bookmarkNews ??= new Command(
+        public ICommand DeleteBookmark => bookmarkNews ??= new Command(
             execute: async (data) =>
             {
                 var news = data as News;
-                await _bookmarkService.BookmarkNews(news);
-                DependencyService.Resolve<IToast>().Show("News bookmarked !");
+                await _bookmarkService.RemoveBookmarkedNews(news);
+                Loader.Result.Remove(news);
+                DependencyService.Resolve<IToast>().Show("News removed from bookmark !");
             },
             canExecute: (data) => data is News
         );

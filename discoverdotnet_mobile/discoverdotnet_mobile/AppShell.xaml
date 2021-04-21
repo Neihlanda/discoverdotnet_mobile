@@ -78,6 +78,14 @@
             </Tab.Icon>
             <ShellContent Route="ProjectPage" ContentTemplate="{DataTemplate local:ProjectPage}" />
         </Tab>
+        <Tab Title="Bookmark">
+            <Tab.Icon>
+                <FontImageSource FontFamily="{StaticResource FontAwesome}" 
+                                 Glyph="{Static ressources:FontAwesomeGlyph.Bookmark}"
+                                 Size="Small"/>
+            </Tab.Icon>
+            <ShellContent Route="BookmarkPage" ContentTemplate="{DataTemplate local:BookmarkPage}" />
+        </Tab>
         <Tab Title="Settings">
             <Tab.Icon>
                 <FontImageSource FontFamily="{StaticResource FontAwesome}" 

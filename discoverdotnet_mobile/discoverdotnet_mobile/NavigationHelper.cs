@@ -12,6 +12,7 @@ namespace discoverdotnet_mobile
         {
             Routing.RegisterRoute(nameof(NewsPage), typeof(NewsPage));
             Routing.RegisterRoute(nameof(ProjectPage), typeof(ProjectPage));
+            Routing.RegisterRoute(nameof(BookmarkPage), typeof(BookmarkPage));
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace discoverdotnet_mobile.ViewModels
@@ -33,6 +35,17 @@ namespace discoverdotnet_mobile.ViewModels
             onChanged?.Invoke();
             OnPropertyChanged(propertyName);
             return true;
+        }
+
+        private ICommand openLink;
+        public ICommand OpenLink => openLink ??= new Command(
+            execute: async (url) => await ProcessOpenLink(url as string),
+            canExecute: (data) => data is string url && !string.IsNullOrEmpty(url)
+        );
+
+        private async Task ProcessOpenLink(string Url)
+        {
+            await Launcher.OpenAsync(Url);
         }
 
         #region INotifyPropertyChanged
