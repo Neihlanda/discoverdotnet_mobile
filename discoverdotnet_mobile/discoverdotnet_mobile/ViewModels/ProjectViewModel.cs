@@ -18,7 +18,7 @@ namespace discoverdotnet_mobile.ViewModels
 
         public override Task InitializeAsync(object parameter)
         {
-            Loader.Load(async () => await DiscoverDotnetService.GetProjects());
+            Loader.Load(async (_) => await DiscoverDotnetService.GetProjects());
             return base.InitializeAsync(parameter);
         }
     }

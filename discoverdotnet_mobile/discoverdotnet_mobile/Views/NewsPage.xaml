@@ -83,6 +83,11 @@
                                                 <Label Text="{Static ressources:FontAwesomeGlyph.Bookmark}" 
                                                        FontFamily="{StaticResource FontAwesome}"
                                                        >
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding Bookmarked}" Value="True">
+                                                            <Setter Property="TextColor" Value="Green" />
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer 
                                                             Command="{Binding BookmarkNews, Source={RelativeSource AncestorType={x:Type viewmodels:NewsViewModel}}}" 

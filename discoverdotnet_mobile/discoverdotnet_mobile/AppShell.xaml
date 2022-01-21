@@ -54,13 +54,14 @@
             </Tab.Icon>
             <ShellContent Route="BookmarkPage" ContentTemplate="{DataTemplate local:BookmarkPage}" />
         </Tab>
-        <Tab Title="Settings">
+        <Tab Title="Infos">
             <Tab.Icon>
                 <FontImageSource FontFamily="{StaticResource FontAwesome}" 
-                                 Glyph="{Static ressources:FontAwesomeGlyph.Cog}"
+                                 Glyph="{Static ressources:FontAwesomeGlyph.Info}"
                                  Size="Small"/>
             </Tab.Icon>
-            <ShellContent Route="ProjectPage" ContentTemplate="{DataTemplate local:ProjectPage}" />
+            <ShellContent Route="InfoPage"
+                          ContentTemplate="{DataTemplate local:InfoPage}" />
         </Tab>
     </TabBar>
    

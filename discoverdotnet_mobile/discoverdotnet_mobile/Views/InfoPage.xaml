@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ressources="clr-namespace:discoverdotnet_mobile.Ressources"
+             xmlns:model="clr-namespace:discoverdotnet_mobile.Models"
+             xmlns:viewmodels="clr-namespace:discoverdotnet_mobile.ViewModels"
+             x:Class="discoverdotnet_mobile.Views.InfoPage"
+             x:DataType="viewmodels:InfoViewModel">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame Style="{StaticResource CardStyle}"
+                       Margin="20,5">
+                    <StackLayout>
+                        <Label HorizontalTextAlignment="Center"
+                               Style="{StaticResource CardTitle}"
+                               Text="Data by Discover .NET">
+                        </Label>
+                        <Grid>
+                            <Label Margin="0,0,20,0"
+                                   Text="Website"
+                                   HorizontalTextAlignment="Center"
+                                   Grid.Column="0">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenLink}"
+                                                          CommandParameter="https://discoverdot.net" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Margin="0,0,20,0"
+                                   HorizontalTextAlignment="Center"
+                                   Text="Project"
+                                   Grid.Column="1">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OpenLink}"
+                                                          CommandParameter="https://github.com/daveaglick/discoverdotnet" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+                <BoxView HeightRequest="1" BackgroundColor="Black" Margin="100,10" />
+                <Label HorizontalTextAlignment="Center"
+                       Text="The source are available on Github under MIT License">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenLink}"
+                                              CommandParameter="https://github.com/Neihlanda/discoverdotnet_mobile" />
+                    </Label.GestureRecognizers>
+                </Label>
+                
+                <BoxView HeightRequest="1"
+                         BackgroundColor="Black"
+                         Margin="100,10" />
+                
+                <Label Style="{StaticResource CardTitle}" HorizontalOptions="Center">This project is built with :</Label>
+
+                <StackLayout BindableLayout.ItemsSource="{Binding PackageUsed}">                    
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="model:Package">                            
+                            <Frame Style="{StaticResource CardStyle}"
+                               Margin="20,5">
+                                <Frame.GestureRecognizers>
+                                     <TapGestureRecognizer Command="{Binding OpenLink, Source={RelativeSource AncestorType={x:Type viewmodels:InfoViewModel}}}"
+                                                              CommandParameter="{Binding ProjectUri}" />
+                                </Frame.GestureRecognizers>
+                                <StackLayout>
+                                    <Label Margin="0,0,20,0"
+                                           Style="{StaticResource CardTitle}"
+                                           Text="{Binding Name}">
+                                    
+                                    </Label>
+                                    <Label VerticalOptions="Center"
+                                           Text="{Binding Version, StringFormat='Version : {0}'}" />
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>             
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

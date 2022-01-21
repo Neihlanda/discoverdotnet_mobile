@@ -48,7 +48,7 @@
                                        TextColor="{StaticResource HeaderText}"
                                        Margin="20,0,0,10"
                                        FontFamily="{StaticResource Italic}"
-                                       Text="A roundup of recent blog posts, podcasts, and more."/>
+                                       Text="All your bookmarked blog posts, podcasts, and more."/>
                             </Grid>
                         </CollectionView.Header>
                         <CollectionView.ItemTemplate>

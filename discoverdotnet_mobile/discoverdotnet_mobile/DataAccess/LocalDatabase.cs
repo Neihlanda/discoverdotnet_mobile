@@ -33,22 +33,22 @@ namespace discoverdotnet_mobile.DataAccess
             _database.CreateTableAsync<News>();
         }
 
-        public Task<List<News>> GetNewsAsync()
+        public Task<List<News>> GetBookmarkedNewsAsync()
         {
             return _database.Table<News>().ToListAsync();
         }
 
-        public async Task<bool> NewsExistAsync(News news)
+        public async Task<bool> BookMarkedNewsExistAsync(News news)
         {
             return await _database.Table<News>().Where(dbnews => dbnews.Link == news.Link).CountAsync() > 0;
         }
 
-        public Task<int> SaveNewsAsync(News News)
+        public Task<int> SaveBookmarkedNewsAsync(News News)
         {
             return _database.InsertAsync(News);
         }
 
-        public Task<int> DeleteNewsAsync(News contact)
+        public Task<int> DeleteBookmarkedNewsAsync(News contact)
         {
             return _database.DeleteAsync(contact);
         }

@@ -17,19 +17,21 @@ namespace discoverdotnet_mobile.Services
 
         public async Task BookmarkNews(News news)
         {
-            if (!await _localDb.NewsExistAsync(news))
-                await _localDb.SaveNewsAsync(news);
+            news.Bookmarked = true;
+            if (!await _localDb.BookMarkedNewsExistAsync(news))
+                await _localDb.SaveBookmarkedNewsAsync(news);
         }
 
         public Task<List<News>> GetBookmarkedNews()
         {
-            return _localDb.GetNewsAsync();
+            return _localDb.GetBookmarkedNewsAsync();
         }
 
         public async Task RemoveBookmarkedNews(News news)
         {
-            if (await _localDb.NewsExistAsync(news))
-                await _localDb.DeleteNewsAsync(news);
+            news.Bookmarked = false;
+            if (await _localDb.BookMarkedNewsExistAsync(news))
+                await _localDb.DeleteBookmarkedNewsAsync(news);
         }
     }
 }

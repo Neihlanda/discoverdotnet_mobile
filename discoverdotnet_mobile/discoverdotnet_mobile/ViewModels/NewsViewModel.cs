@@ -4,6 +4,7 @@ using discoverdotnet_mobile.Services;
 using Sharpnado.Presentation.Forms;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -26,7 +27,13 @@ namespace discoverdotnet_mobile.ViewModels
 
         public override Task InitializeAsync(object parameter)
         {
-            Loader.Load(LoadLastNews);
+            Loader.Load(async (_) => {
+                var LastNews = await LoadLastNews();
+                var bookMarkedNews = await _bookmarkService.GetBookmarkedNews();
+                foreach(var news in LastNews)
+                    news.Bookmarked = bookMarkedNews.Any(p => p.Link == news.Link);
+                return LastNews;
+            });
             return base.InitializeAsync(parameter);
         }
 

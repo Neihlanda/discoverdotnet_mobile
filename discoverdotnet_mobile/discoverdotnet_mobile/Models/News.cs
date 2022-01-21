@@ -15,5 +15,6 @@ namespace discoverdotnet_mobile.Models
         public DateTime Published { get; set; }
         public IDictionary<string, string> Links { get; }
         public string Author { get; set; }
+        public bool Bookmarked { get;set; }
     }
 }

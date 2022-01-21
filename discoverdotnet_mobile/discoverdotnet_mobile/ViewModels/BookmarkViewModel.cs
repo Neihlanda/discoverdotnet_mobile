@@ -25,7 +25,7 @@ namespace discoverdotnet_mobile.ViewModels
 
         public override Task InitializeAsync(object parameter)
         {
-            Loader.Load(async () => new ObservableCollection<News>(await _bookmarkService.GetBookmarkedNews()));
+            Loader.Load(async (_) => new ObservableCollection<News>(await _bookmarkService.GetBookmarkedNews()));
             return base.InitializeAsync(parameter);
         }
 
